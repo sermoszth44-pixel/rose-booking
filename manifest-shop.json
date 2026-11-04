@@ -1,0 +1,17 @@
+{
+  "id": "./?shop=1",
+  "name": "Rosé ระบบจัดการคิวร้าน",
+  "short_name": "Rosé ร้าน",
+  "description": "คิววันนี้ ปฏิทิน ลูกค้า และรายงานรายได้ของร้าน",
+  "lang": "th",
+  "start_url": "./?shop=1",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#FAF6F4",
+  "theme_color": "#FAF6F4",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FAF6F4">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Rosé">
+<meta name="description" content="จองคิวต่อขนตา ต่อผม ทำสีผม และสระไดร์ออนไลน์ เลือกช่างและเวลาได้เอง">
+<meta property="og:title" content="Rosé Lash & Hair Studio จองคิวออนไลน์">
+<meta property="og:description" content="เลือกบริการ ช่าง และเวลาได้เอง ไม่ต้องแอดไลน์">
+<meta property="og:image" content="icons/icon-512.png">
+<title>Rosé Lash & Hair Studio</title>
+<link rel="manifest" id="mf" href="manifest.json">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<script>
+  // The shop's staff install from ?shop=1, so their home-screen icon opens the shop login instead of the booking page.
+  if (/[?&](shop|admin)\b/.test(location.search)) {
+    document.getElementById('mf').href = 'manifest-shop.json';
+    document.querySelector('meta[name=apple-mobile-web-app-title]').content = 'Rosé ร้าน';
+  }
+</script>
+<style>
+  /* The iframe can't read the iPhone safe-area insets, so the wrapper pads for them. */
+  html, body { margin: 0; height: 100%; background: #FAF6F4; overflow: hidden; }
+  body { display: flex; flex-direction: column; }
+  .safe-top { height: env(safe-area-inset-top, 0px); background: #FAF6F4; flex: none; }
+  .safe-bottom { height: env(safe-area-inset-bottom, 0px); background: #FAF6F4; flex: none; }
+  iframe { flex: 1; width: 100%; border: 0; display: block; }
+  .loading { position: fixed; inset: 0; display: grid; place-items: center; background: #FAF6F4; transition: opacity .35s; }
+  .loading.done { opacity: 0; pointer-events: none; }
+  .loading img { width: 76px; height: 76px; border-radius: 20px; animation: breathe 1.6s ease-in-out infinite; }
+  @keyframes breathe { 50% { transform: scale(.94); opacity: .8; } }
+  @media (prefers-reduced-motion: reduce) { .loading img { animation: none; } }
+</style>
+</head>
+<body>
+<div class="safe-top"></div>
+<iframe id="app" title="Rosé Lash & Hair Studio" allow="clipboard-write"></iframe>
+<div class="safe-bottom"></div>
+<div class="loading" id="loading"><img src="icons/icon-192.png" alt=""></div>
+<script>
+  // Apps Script web app URL (ends in /exec). Replace after deploying.
+  const EXEC_URL = 'https://script.google.com/macros/s/AKfycbzIma3_siBJHBsy-4_7uZyuGyeeYvr2BZyYyuDuZrW0Rj_AX91hT6DVmXHx184TR77F/exec';
+  const frame = document.getElementById('app');
+  // Pass ?b=<token> (booking ticket) and ?shop=1 (shop login) through to the app.
+  frame.src = EXEC_URL + location.search;
+  frame.addEventListener('load', () => document.getElementById('loading').classList.add('done'));
+</script>
+</body>
+</html>
